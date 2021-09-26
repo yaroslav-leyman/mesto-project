@@ -16,3 +16,16 @@
   opacity: 0.6;
   transition: 0.45s;
 }
+
+@media screen and (max-width: 650px) {
+  .profile__button-add {
+    position: static;
+    margin-top: 36px;
+    width: 50%;
+  }
+}
+@media screen and (max-width: 470px) {
+  .profile__button-add {
+    width: 100%;
+  }
+}

@@ -4,3 +4,24 @@
   align-items: flex-start;
   margin: 45px 200px 40px 200px;
 }
+
+@media screen and (max-width: 1050px) {
+  .header {
+    margin: 45px 150px 40px 150px;
+  }
+}
+@media screen and (max-width: 960px) {
+  .header {
+    margin: 45px 100px 40px 100px;
+  }
+}
+@media screen and (max-width: 850px) {
+  .header {
+    margin: 45px 50px 40px 50px;
+  }
+}
+@media screen and (max-width: 778px) {
+  .header {
+    margin: 0;
+  }
+}

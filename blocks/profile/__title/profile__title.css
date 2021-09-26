@@ -6,3 +6,21 @@
   line-height: 114%;
   color: #FFFFFF;
 }
+
+@media screen and (max-width: 699px) {
+  .profile__title {
+    font-size: 35px;
+    line-height: 34px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .profile__title {
+    padding-top: 22px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .profile__title {
+    font-size: 27px;
+    line-height: 33px;
+  }
+}
