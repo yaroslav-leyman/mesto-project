@@ -1,8 +1,16 @@
 .popup__close {
-  margin-bottom: 385px;
   cursor: pointer;
+  margin-left: 415px;
 }
 .popup__close:hover {
   opacity: 0.6;
   transition: 0.45s;
+}
+
+@media screen and (max-width: 470px) {
+  .popup__close {
+    width: 20px;
+    margin-left: auto;
+    padding: 0 19px 16px 0;
+  }
 }
