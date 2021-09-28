@@ -3,6 +3,7 @@
   height: 50px;
   background-color: #000000;
   border-radius: 2px;
+  border: none;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
@@ -13,4 +14,11 @@
 .popup__button:hover {
   opacity: 0.8;
   transition: 0.45s;
+}
+
+@media screen and (max-width: 470px) {
+  .popup__button {
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
