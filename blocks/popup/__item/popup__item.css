@@ -1,8 +1,7 @@
 .popup__item {
   border: 0;
   width: 100%;
-  opacity: 0.2;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid rgba(0 0 0 / 20%);
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
