@@ -36,6 +36,48 @@ function formSubmitHandler (evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
-  closeForm(evt)
+  closeForm(evt);
 }
 formElement.addEventListener('submit', formSubmitHandler);
+
+
+//initial cards
+const directorsList = document.querySelector('.elements');
+const directorTemplate = document.querySelector('.elements__element');
+
+const deleteCards = document.querySelectorAll('.elements__element');
+deleteCards.forEach( e => e.remove() ); // Удаление старых карточек
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+  ];
+
+initialCards.forEach(function (element) {
+  const directorElement = directorTemplate.cloneNode(true);
+  directorElement.querySelector('.elements__image').src = element.link;
+  directorElement.querySelector('.elements__title').textContent = element.name;
+  directorsList.append(directorElement);
+});
