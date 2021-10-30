@@ -73,11 +73,112 @@ const initialCards = [
     name: 'Байкал',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
-  ];
+];
 
-initialCards.forEach(function (element) {
-  const directorElement = directorTemplate.cloneNode(true);
-  directorElement.querySelector('.elements__image').src = element.link;
-  directorElement.querySelector('.elements__title').textContent = element.name;
-  directorsList.append(directorElement);
+
+// проходим по массиву данных и отрисовываем карточки с помощью fetchCard()
+initialCards.forEach((element) => {
+  fetchCard(element);
 });
+const testT = {};
+
+  function fetchCard(element) {
+
+    let directorElement = directorTemplate.cloneNode(true);
+    let photo = directorElement.querySelector('.elements__image');
+      photo.src = element.link;
+      photo.alt = element.name;
+    directorElement.querySelector('.elements__title').textContent = element.name;
+
+    // лайки
+    directorElement.querySelector('.elements__heart').addEventListener('click', function (evt) {
+      evt.target.classList.toggle('elements__heart_active');
+    });
+
+    // функция удаления карточек
+    const deleteCard = directorElement.querySelector('.elements__delete');
+    deleteCard.addEventListener('click', function() {
+      directorElement.remove();
+    });
+
+    // Попап карточки
+    photo.addEventListener('click', function () {
+      popupPhoto(element);
+    });
+
+    addCard(directorElement);
+  }
+
+  function addCard(directorElement) {
+    directorsList.prepend(directorElement);
+  }
+
+
+// photo popup
+function popupPhoto(el) {
+
+  let popPhoto = document.querySelector('.popup-card');
+      popPhoto.classList.add('popup-card_opened');
+
+  let descrPopup = popPhoto.querySelector('.popup-card__description');
+  let imagePopup = popPhoto.querySelector('.popup-card__image');
+
+  descrPopup.textContent = el.name;
+  imagePopup.src = el.link;
+  imagePopup.alt = el.name;
+  console.log(el.link);
+
+  let popPhotoClosed = popPhoto.querySelector('.popup-card__close');
+
+  popPhotoClosed.addEventListener('click', () => {
+    popPhoto.classList.remove('popup-card_opened');
+  });
+}
+
+
+// Modal popup-add
+const popupAdd = document.querySelector('.popup-add');
+const containerAdd = document.querySelector('.popup-add__container');
+const openPopupButtonsAdd = document.querySelectorAll('.profile__button-add');
+const closePopupButtonAdd = document.querySelector('.popup-add__close');
+const submitBtnAdd = document.querySelector('.popup-add__button');
+
+openPopupButtonsAdd.forEach((button) => {
+  button.addEventListener('click', (e) => {
+      e.preventDefault();
+      popupAdd.classList.add('active');
+      containerAdd.classList.add('active');
+      popupAdd.classList.add('popup-add_opened');
+  });
+});
+
+closePopupButtonAdd.addEventListener('click',() => {
+  popupAdd.classList.remove('popup-add_opened');
+  containerAdd.classList.remove('popup-add_opened');
+});
+
+function closeForm(evt) {
+  evt.preventDefault();
+  popupAdd.classList.remove('popup-add_opened');
+}
+submitBtnAdd.addEventListener('click', formSubmitHandler);
+
+
+
+//Добавляем новую карточку
+const photoTemplate = document.querySelector('#elements-template').content;
+function formSubmitHandler (evt) {
+  evt.preventDefault();
+
+  const photoPlaceInput = document.querySelector('#mesto');
+  const photoLinkInput = document.querySelector('#link');
+
+  const newCard = {
+      name: photoPlaceInput.value,
+      link: photoLinkInput.value
+  };
+
+  fetchCard(newCard);
+  closeForm(evt);
+}
+photoTemplate.addEventListener('submit', formSubmitHandler);

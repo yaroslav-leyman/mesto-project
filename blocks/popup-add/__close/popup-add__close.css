@@ -1,0 +1,23 @@
+.popup-add__close {
+  cursor: pointer;
+  margin-left: 230px;
+  background-color: rgba(0,0,0,0);
+  border: none;
+}
+.popup-add__close:hover {
+  opacity: 0.6;
+  transition: 0.45s;
+}
+
+@media screen and (max-width: 669px) {
+  .popup-add__close {
+    margin-left: 210px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .popup-add__close {
+    width: 20px;
+    margin-left: auto;
+    padding: 0;
+  }
+}

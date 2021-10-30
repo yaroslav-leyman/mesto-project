@@ -1,0 +1,21 @@
+.popup-add__main-container {
+  min-width: 430px;
+  padding: 34px 36px 37px 36px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 669px) {
+  .popup-add__main-container {
+    min-width: 235px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .popup-add__main-container {
+    margin-top: 16px;
+    min-width: 235px;
+    padding: 25px 22px;
+  }
+}
