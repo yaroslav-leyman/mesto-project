@@ -1,4 +1,9 @@
 .popup-card__description {
   margin: 0;
-  padding: 0;
+  padding-top: 10px;
+  margin-right: auto;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #FFFFFF;
 }

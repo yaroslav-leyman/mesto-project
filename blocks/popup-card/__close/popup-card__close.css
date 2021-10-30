@@ -1,23 +1,21 @@
 .popup-card__close {
   cursor: pointer;
-  margin-left: 230px;
+  margin-left: auto;
+  padding: 0;
   background-color: rgba(0,0,0,0);
   border: none;
+  margin-right: -18px;
 }
 .popup-card__close:hover {
   opacity: 0.6;
   transition: 0.45s;
 }
 
-@media screen and (max-width: 669px) {
-  .popup-card__close {
-    margin-left: 210px;
-  }
-}
+
 @media screen and (max-width: 470px) {
   .popup-card__close {
     width: 20px;
-    margin-left: auto;
-    padding: 0;
+    padding-bottom: 5px;
+    margin-right: 0;
   }
 }

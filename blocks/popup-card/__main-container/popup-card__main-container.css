@@ -1,23 +1,5 @@
 .popup-card__main-container {
-  min-width: 430px;
-  height: 430px;
-  max-width: 75vw;
-  max-height: 75vh;
-  border: 1px solid #ccc;
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
   box-sizing: border-box;
-}
-
-@media screen and (max-width: 669px) {
-  .popup-card__main-container {
-    min-width: 235px;
-  }
-}
-@media screen and (max-width: 470px) {
-  .popup-card__main-container {
-    margin-top: 16px;
-    min-width: 235px;
-    padding: 25px 22px;
-  }
+  width: 100%;
 }
