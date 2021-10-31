@@ -23,7 +23,7 @@ function closeForm(evt) {
   evt.preventDefault();
   popup.classList.remove('popup_opened');
 }
-submitBtn.addEventListener('click', formSubmitHandler);
+submitBtn.addEventListener('click', editProfileHandler);
 
 const formElement = document.querySelector('.profile');
 const nameInput = document.querySelector('#heading');
@@ -31,14 +31,14 @@ const jobInput = document.querySelector('#subheading');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__description');
 
-function formSubmitHandler (evt) {
+function editProfileHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
 
   closeForm(evt);
 }
-formElement.addEventListener('submit', formSubmitHandler);
+formElement.addEventListener('submit', editProfileHandler);
 
 
 //initial cards
@@ -95,7 +95,7 @@ const testT = {};
       evt.target.classList.toggle('elements__heart_active');
     });
 
-    // функция удаления карточек
+    // удаление карточек
     const deleteCard = directorElement.querySelector('.elements__delete');
     deleteCard.addEventListener('click', function() {
       directorElement.remove();
@@ -157,17 +157,17 @@ closePopupButtonAdd.addEventListener('click',() => {
   containerAdd.classList.remove('popup-add_opened');
 });
 
-function closeForm(evt) {
+function closePopUpForm(evt) {
   evt.preventDefault();
   popupAdd.classList.remove('popup-add_opened');
 }
-submitBtnAdd.addEventListener('click', formSubmitHandler);
+submitBtnAdd.addEventListener('click', addNewCardHandler);
 
 
 
 //Добавляем новую карточку
 const photoTemplate = document.querySelector('#elements-template').content;
-function formSubmitHandler (evt) {
+function addNewCardHandler (evt) {
   evt.preventDefault();
 
   const photoPlaceInput = document.querySelector('#mesto');
@@ -179,6 +179,6 @@ function formSubmitHandler (evt) {
   };
 
   fetchCard(newCard);
-  closeForm(evt);
+  closePopUpForm(evt);
 }
-photoTemplate.addEventListener('submit', formSubmitHandler);
+photoTemplate.addEventListener('submit', addNewCardHandler);
