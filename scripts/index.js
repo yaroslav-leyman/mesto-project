@@ -22,10 +22,6 @@ const submitBtnAdd = document.querySelector('.popup-add__button');
 
 //initial cards
 const directorsList = document.querySelector('.elements');
-const directorTemplate = document.querySelector('.elements__element');
-
-const deleteCards = document.querySelectorAll('.elements__element');
-      deleteCards.forEach( e => e.remove() ); // Удаление старых карточек
 
 const initialCards = [
   {
@@ -66,44 +62,58 @@ initialCards.forEach((element) => {
 function openModalWindow(modalWindow) {
   modalWindow.classList.add('popup-card_opened');
 }
+
 //Функция закрытия попапа
 function closeModalWindow(modalWindow) {
   modalWindow.classList.remove('popup-card_opened');
 }
 
-// Функция создания новой карточки <---- разбить на 2 функции, создания новой карточки и загрузки на сайт
-function createCard(element) {
+// Функция создания новой карточки
+function createCard(card) {
+  const elementCard = document.createElement("div");
+  elementCard.classList.add("elements__element");
+  elementCard.innerHTML = `
+      <div class="elements__element">
+        <img src="" alt="" class="elements__image">
+        <div class="elements__footer">
+          <h2 class="elements__title"></h2>
+          <button type="button" class="elements__heart"><img src="images/heart.svg" alt="лайк"></button>
+        </div>
+        <button type="button"  class="elements__delete"><img src="images/delete.svg" alt="удалить"></button>
+      </div>`;
 
-  const directorElement = directorTemplate.cloneNode(true);
-  const photo = directorElement.querySelector('.elements__image');
-    photo.src = element.link;
-    photo.alt = element.name;
-  directorElement.querySelector('.elements__title').textContent = element.name;
+  elementCard.querySelector(".elements__title").textContent = card.name;
+  elementCard.querySelector(".elements__image").src = card.link;
 
   // лайк карточки
-  directorElement.querySelector('.elements__heart').addEventListener('click', function (evt) {
+  elementCard.querySelector('.elements__heart').addEventListener('click', function (evt) {
     evt.target.classList.toggle('elements__heart_active');
   });
 
   // удаление карточек
-  const deleteCard = directorElement.querySelector('.elements__delete');
+  const deleteCard = elementCard.querySelector('.elements__delete');
   deleteCard.addEventListener('click', function() {
-    directorElement.remove();
+    elementCard.remove();
   });
 
-  // Зум карточки
+  // зум карточки
+  const photo = elementCard.querySelector('.elements__image');
+    photo.src = card.link;
+    photo.alt = card.name;
   photo.addEventListener('click', function () {
-    popupPhoto(element);
+    popupPhoto(card);
   });
+  elementCard.querySelector('.elements__title').textContent = card.name;
 
-  addCard(directorElement);
+  return elementCard;
 }
 
-function addCard(directorElement) {
-  directorsList.prepend(directorElement);
+// Функция загрузки карточек на сайт
+function uploadCard(array, directorsList) {
+  array.forEach((card) => directorsList.prepend(createCard(card)));
 }
 
-// Функция добавления карточки в контейнер <---- заменить на обработчик добавления карточки
+// Функция добавления карточки
 const photoTemplate = document.querySelector('#elements-template').content;
 function addNewCardHandler (evt) {
   evt.preventDefault();
@@ -111,12 +121,12 @@ function addNewCardHandler (evt) {
   const photoPlaceInput = document.querySelector('#mesto');
   const photoLinkInput = document.querySelector('#link');
 
-  const newCard = {
-      name: photoPlaceInput.value,
-      link: photoLinkInput.value
-  };
+  directorsList.prepend(createCard({
+    name: photoPlaceInput.value,
+    link: photoLinkInput.value
+  }));
 
-  createCard(newCard);
+  createCard(directorsList);
   closeModalWindow(popupAddCard);
 }
 photoTemplate.addEventListener('submit', addNewCardHandler);
@@ -149,6 +159,9 @@ function editProfileHandler (evt) {
   closeModalWindow(popupEdit);
 }
 formElement.addEventListener('submit', editProfileHandler);
+
+// Вызов фукциий
+uploadCard(initialCards, directorsList);
 
 
 
