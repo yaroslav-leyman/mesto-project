@@ -25,7 +25,7 @@ const directorsList = document.querySelector('.elements');
 const directorTemplate = document.querySelector('.elements__element');
 
 const deleteCards = document.querySelectorAll('.elements__element');
-deleteCards.forEach( e => e.remove() ); // Удаление старых карточек
+      deleteCards.forEach( e => e.remove() ); // Удаление старых карточек
 
 const initialCards = [
   {
@@ -54,7 +54,6 @@ const initialCards = [
   }
 ];
 
-
 // проходим по массиву данных и отрисовываем карточки с помощью createCard()
 initialCards.forEach((element) => {
   createCard(element);
@@ -65,15 +64,14 @@ initialCards.forEach((element) => {
 // Функции
 // Функция открытия попапа
 function openModalWindow(modalWindow) {
-  modalWindow.classList.add('popup_opened');
+  modalWindow.classList.add('popup-card_opened');
 }
-
 //Функция закрытия попапа
 function closeModalWindow(modalWindow) {
-  modalWindow.classList.remove('popup_opened');
+  modalWindow.classList.remove('popup-card_opened');
 }
 
-// Функция создания новой карточки
+// Функция создания новой карточки <---- разбить на 2 функции, создания новой карточки и загрузки на сайт
 function createCard(element) {
 
   const directorElement = directorTemplate.cloneNode(true);
@@ -105,7 +103,7 @@ function addCard(directorElement) {
   directorsList.prepend(directorElement);
 }
 
-// Функция добавления карточки в контейнер
+// Функция добавления карточки в контейнер <---- заменить на обработчик добавления карточки
 const photoTemplate = document.querySelector('#elements-template').content;
 function addNewCardHandler (evt) {
   evt.preventDefault();
@@ -119,7 +117,7 @@ function addNewCardHandler (evt) {
   };
 
   createCard(newCard);
-  closePopUpForm(evt);
+  closeModalWindow(popupAddCard);
 }
 photoTemplate.addEventListener('submit', addNewCardHandler);
 
@@ -127,7 +125,7 @@ photoTemplate.addEventListener('submit', addNewCardHandler);
 function popupPhoto(el) {
 
   const popPhoto = document.querySelector('.popup-card');
-      popPhoto.classList.add('popup-card_opened');
+      openModalWindow(popPhoto);
 
   const descrPopup = popPhoto.querySelector('.popup-card__description');
   const imagePopup = popPhoto.querySelector('.popup-card__image');
@@ -136,32 +134,33 @@ function popupPhoto(el) {
   imagePopup.src = el.link;
   imagePopup.alt = el.name;
 
-  const popPhotoClosed = popPhoto.querySelector('.popup-card__close');
-
-  popPhotoClosed.addEventListener('click', () => {
-    popPhoto.classList.remove('popup-card_opened');
+  popPhoto.addEventListener('click', () => {
+    closeModalWindow(popPhoto);
   });
 }
-// Функция сохранения карточки
-function closePopUpForm(evt) {
+
+// Функция сохранения информации в профиле
+function editProfileHandler (evt) {
   evt.preventDefault();
-  popupAddCard.classList.remove('popup-add_opened');
+
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+
+  closeModalWindow(popupEdit);
 }
-submitBtnAdd.addEventListener('click', addNewCardHandler);
+formElement.addEventListener('submit', editProfileHandler);
 
 
 
 // Обработчики
 // Обработчик открытия окна добавления карточки
 openPopupButtonsAdd.addEventListener('click',() => {
-  popupAddCard.classList.add('popup-add_opened');
-  containerAddCard.classList.add('popup-add_opened');
+  openModalWindow(popupAddCard);
 });
 
 // Обработчик открытия окна редактирования
 openPopupButtons.addEventListener('click',() => {
-  popupEdit.classList.add('popup_opened');
-  containerEdit.classList.add('popup_opened');
+  openModalWindow(popupEdit);
 
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
@@ -172,22 +171,14 @@ openPopupButtons.addEventListener('click',() => {
 
 // Обработчик закрытия окна добавления карточки
 closePopupButtonAdd.addEventListener('click',() => {
-  popupAddCard.classList.remove('popup-add_opened');
-  containerAddCard.classList.remove('popup-add_opened');
+  closeModalWindow(popupAddCard);
 });
 
 // Обработчик закрытия окна редактирования
 closePopupButton.addEventListener('click',() => {
-  popupEdit.classList.remove('popup_opened');
-  containerEdit.classList.remove('popup_opened');
+  closeModalWindow(popupEdit);
 });
 
-// Обработчик работы кнопки сохранить
+// Обработчик нажатия кнопки сохранить профиль и создать карточку
 submitBtn.addEventListener('click', editProfileHandler);
-function editProfileHandler (evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  popupEdit.classList.remove('popup_opened');
-}
-formElement.addEventListener('submit', editProfileHandler);
+submitBtnAdd.addEventListener('click', addNewCardHandler);
