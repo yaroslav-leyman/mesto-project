@@ -12,8 +12,7 @@
 **Используемые технологии**
 * HTML
 * CSS
-* Flexbox
-* Grid Layout
+* JavaScript
 * БЭМ
 
 **GitHub Pages**
