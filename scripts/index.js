@@ -117,7 +117,7 @@ function addNewCardHandler (evt) {
     link: photoLinkInput.value
   }));
 
-  createCard(directorsList);
+  cardAddForm.reset();
   closeModalWindow(popupAddCard);
 }
 cardAddForm.addEventListener('submit', addNewCardHandler);
